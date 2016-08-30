@@ -1,7 +1,6 @@
 <h1><%= @list.name %></h1>
-<ul class="list-unstyled">
-  <% @list.todo_items.each do |todo_item| %>
-    <% f.select(todo_item.task) %>
-    <li><%= check_box_tag "task[name]", false %><%= todo_item.task %></li>
+<%= form_for @list do |f| %>
+  <%= f.fields_for :todo_items do |tdf| %>
+    <%= tdf.check_box :completed? %><%= tdf.object.task %>
   <% end %>
-</ul>
+<% end %>
